@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+    <h2>GESTIÓN PRODUCTOS</h2>
+    <h4>EDITAR PRODUCTO</h4>
+
+    {% if mensaje %}
+        <div class="alert alert-danger" role="alert">
+            {{ mensaje }}
+        </div>
+    {% endif %}
+
+    <form action="/actualizar" method="POST" enctype="multipart/form-data">
+        <!-- Campo oculto para enviar el ID del producto -->
+        <input type="hidden" name="idProducto" id="idProducto" value="{{ producto['_id'] }}">
+
+        <div class="form-group">
+            <label for="txtCodigo">Código:</label>
+            <input type="number" class="form-control" name="txtCodigo" id="txtCodigo" value="{{ producto['codigo'] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="txtNombre">Nombre:</label>
+            <input type="text" class="form-control" name="txtNombre" id="txtNombre" value="{{ producto['nombre'] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="txtPrecio">Precio:</label>
+            <input type="number" class="form-control" name="txtPrecio" id="txtPrecio" value="{{ producto['precio'] }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cbCategoria">Categoría:</label>
+            <select class="form-control" name="cbCategoria" id="cbCategoria" required>
+                <option value="Electrodomestico" {% if producto['categoria'] == 'Electrodomestico' %}selected{% endif %}>Electrodomestico</option>
+                <option value="Accesorios" {% if producto and (producto['categoria'] == 'Accesorios' or producto['categoría'] == 'Accesorios') %}selected{% endif %}>Accesorios</option>
+                <option value="Ropa" {% if producto['categoria'] == 'Ropa' %}selected{% endif %}>Ropa</option>
+                <option value="Tecnologia" {% if producto['categoria'] == 'Tecnologia' %}selected{% endif %}>Tecnologia</option>
+            </select>
+        </div>
+
+        <div class="form-group text-center">
+            <label>Foto actual:</label><br>
+            <img src="../static/imagenes/{{ producto['_id'] }}.jpg" width="100" height="100" class="img-thumbnail mb-2">
+        </div>
+
+        <div class="form-group">
+            <label for="fileFoto">Seleccione Foto (.jpg) si va a cambiar:</label>
+            <input type="file" class="form-control-file" name="fileFoto" id="fileFoto" accept=".jpg">
+        </div>
+
+        <button type="submit" class="btn btn-success">Editar</button>
+        <a href="/" class="btn btn-warning">Cancelar</a>
+    </form>
+
+</body>
+</html>
