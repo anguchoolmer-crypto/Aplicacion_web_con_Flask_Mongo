@@ -21,7 +21,7 @@ def agregarProducto():
     try:
         codigo = int(request.form["txtCodigo"])
         nombre = request.form["txtNombre"]
-        precio = int(request.form["txtPrecio"])
+        precio = int(request.form["txtPrecio"]) 
         categoria = request.form["cbCategoria"]
         
         archivo = request.files["fileFoto"]

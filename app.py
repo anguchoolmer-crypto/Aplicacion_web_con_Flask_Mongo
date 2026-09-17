@@ -10,7 +10,7 @@ baseDatos = miConexion["ALMACEN"]
 productos = baseDatos["PRODUCTOS"]
 
 # Importar el controlador después de definir app y productos
-from controllerProducto import *
+from    controladores.controllerProducto import *
 
 if __name__ == "__main__":
     app.run(port=3000, debug=True)
